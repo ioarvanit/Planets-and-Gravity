@@ -1,24 +1,35 @@
 class Attractor {
+  //The mass of the attractor
   float mass;
+  
+  //The Gravity global constant
   float G;
+  
+  //Attractor position on screen
   float x;
   float y;
   PVector location;
   
+  
+  //When creating new attractor we get as parameters the mass and the position
   Attractor(float m,float x_, float y_) {
     mass = m;
     x = x_;
     y = y_;
-    G = 0.4;
     location = new PVector(x, y);
+    
+    //The bigger the number the grater the forces
+    G = 1;
   }
   
+  //Calculate the force the attractor has on the mover
   PVector attract(Mover m) {
-    //PVector force = PVector.sub(location - m.location);
     PVector force = location.copy();
     force.sub(m.location);
     float distance = force.mag();
-    distance = constrain(distance,10.0,20.0);
+    println(distance);
+    //constrain the distance between 10-100
+    distance = constrain(distance,10.0,100.0);
     force.normalize();
     float strength = (G * mass * m.mass) / (distance * distance);
     force.mult(strength);
@@ -26,7 +37,7 @@ class Attractor {
   }
   
   void display() {
-    stroke(#F26405);
+    stroke(#B94F0D);
     fill(#F26405);
     ellipse(location.x,location.y,mass,mass);
   }

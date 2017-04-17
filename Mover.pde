@@ -12,7 +12,7 @@ class Mover {
   }
   
   void applyForce(PVector force) {
-    if (DispForces) {
+    if (DisplayForcesOn) {
       displayForces(force);
     }
     PVector f = PVector.div(force,mass);
@@ -26,15 +26,15 @@ class Mover {
   }
   
   void display() {
-    stroke(175);
+    stroke(80);
     fill(175);
     ellipse(location.x,location.y,mass,mass);
   }
   
   void displayForces(PVector force) {
     PVector endV = force.copy();
-    endV.mult(50);
-    stroke(255,0,0);
+    endV.mult(100);
+    stroke(#B94F0D);
     pushMatrix();
     translate(location.x,location.y);
     line(0,0,endV.x,endV.y);

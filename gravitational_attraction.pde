@@ -1,25 +1,37 @@
-Mover[] movers = new Mover[100];              //An array to store all mover objects
-Attractor[] attractors = new Attractor[100];  //An array to store all attractor objects
-int mcount,acount;                            //the number of movers and attractors created
-PVector tempCenter,tempEdge,tempDiam;         //temporary vectors for drawing movers and attractors with mouse 
-Boolean DispForces;
+//An array to store all mover objects, maximum 100
+Mover[] movers = new Mover[99];              
+
+//An array to store all attractor objects, maximum 100
+Attractor[] attractors = new Attractor[99];  
+
+//the number of movers and attractors created
+int mCount,aCount;   
+
+//temporary vectors for drawing movers and attractors with mouse
+PVector tempCenter,tempEdge,tempDiam;
+
+//Boolean for wether to display forces or not
+Boolean DisplayForcesOn;
+
 
 void setup() {
   size(1200,900);
   
-  DispForces = false;
+  //Don not display forces
+  DisplayForcesOn = false;
    
   //Initialize the movers and attractors count
-  mcount = 0;
-  acount = 0;
+  mCount = 0;
+  aCount = 0;
 }
+
 
 void draw() {
   
   //clear the background and erase all objects
   background(0);
   
-  //if mouse is pressed we are creating a new mover or attractor
+  //if mouse is pressed we are creating a new mover or attractor. Left button for mover and right for attractor
   if (mousePressed) {
     if (mouseButton == LEFT) {
       //Mover colors
@@ -30,6 +42,7 @@ void draw() {
       stroke(#F26405);
       fill(#F26405);
     }
+    
     //Draw the temporary object on screen
     tempEdge = new PVector(mouseX,mouseY);
     tempDiam = PVector.sub(tempCenter,tempEdge);
@@ -37,13 +50,13 @@ void draw() {
    }
   
   //Display all attractors
-  for (int i = 0; i < acount; i++) {
+  for (int i = 0; i < aCount; i++) {
     attractors[i].display();
   }
 
   //Update and display all mover objects
-  for (int i = 0; i < mcount; i++) {
-    for (int j = 0; j < acount; j++) {
+  for (int i = 0; i < mCount; i++) {
+    for (int j = 0; j < aCount; j++) {
       PVector f = attractors[j].attract(movers[i]);
       movers[i].applyForce(f);
     }
@@ -52,25 +65,29 @@ void draw() {
   }
 }
 
+
+//When mouse is first pressed that will be the center of the new object
 void mousePressed() {
   tempCenter = new PVector(mouseX,mouseY);
 }
 
 
-//When mouse clicked create a new mover
+//When mouse is released then we create the mover or attractor
 void mouseReleased() {
-  if (mouseButton == LEFT) {
-    movers[mcount] = new Mover(2*tempDiam.mag(),tempCenter.x,tempCenter.y);
-    mcount++;
-  } else if (mouseButton == RIGHT) {
-    attractors[acount] = new Attractor(2*tempDiam.mag(),tempCenter.x,tempCenter.y);
-    acount++;
+  if (mouseButton == LEFT && mCount < 99) {
+    movers[mCount] = new Mover(2*tempDiam.mag(),tempCenter.x,tempCenter.y);
+    mCount++;
+  } else if (mouseButton == RIGHT && aCount < 99) {
+    attractors[aCount] = new Attractor(2*tempDiam.mag(),tempCenter.x,tempCenter.y);
+    aCount++;
   }
   
 }
 
+
+//Toggle the display forces with f key
 void keyPressed() {
   if (key == 'f' || key == 'F' || key == 'φ' || key == 'Φ') {
-    DispForces = !DispForces; 
+    DisplayForcesOn = !DisplayForcesOn; 
   }
 }
