@@ -4,10 +4,10 @@ Mover[] movers = new Mover[99];
 //An array to store all attractor objects, maximum 100
 Attractor[] attractors = new Attractor[99];  
 
-//the number of movers and attractors created
+//The number of movers and attractors created
 int mCount,aCount;   
 
-//temporary vectors for drawing movers and attractors with mouse
+//Temporary vectors for drawing movers and attractors with mouse
 PVector tempCenter,tempEdge,tempDiam;
 
 //Boolean for wether to display forces or not
@@ -31,7 +31,14 @@ void draw() {
   //clear the background and erase all objects
   background(0);
   
-  //if mouse is pressed we are creating a new mover or attractor. Left button for mover and right for attractor
+  //Write instructions on screen
+  fill(#00DCE5);
+  textSize(20);
+  text("Click and drag left mouse button to draw moving objects",20,20);
+  text("Click and drag right mouse button to draw attracting objects",20,40);
+  text("Toggle show forces on and off with f key",20,60);
+  
+  //If mouse is pressed we are creating a new mover or attractor. Left button for mover and right for attractor
   if (mousePressed) {
     if (mouseButton == LEFT) {
       //Mover colors
