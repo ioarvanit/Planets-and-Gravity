@@ -81,14 +81,21 @@ void mousePressed() {
 
 //When mouse is released then we create the mover or attractor
 void mouseReleased() {
-  if (mouseButton == LEFT && mCount < 99) {
-    movers[mCount] = new Mover(2*tempDiam.mag(),tempCenter.x,tempCenter.y);
-    mCount++;
-  } else if (mouseButton == RIGHT && aCount < 99) {
-    attractors[aCount] = new Attractor(2*tempDiam.mag(),tempCenter.x,tempCenter.y);
-    aCount++;
-  }
-  
+  if (mouseButton == LEFT) {
+    if (mCount < 99) {
+      movers[mCount] = new Mover(2*tempDiam.mag(),tempCenter.x,tempCenter.y);
+      mCount++;
+    } else {
+      println("Maximum number of mover objects (100) reached!");
+    }
+  } else if (mouseButton == RIGHT) {
+    if (aCount < 99) {
+      attractors[aCount] = new Attractor(2*tempDiam.mag(),tempCenter.x,tempCenter.y);
+      aCount++;
+    } else {
+      println("Maximum number of attractor objects (100) reached!");
+    }
+  } 
 }
 
 

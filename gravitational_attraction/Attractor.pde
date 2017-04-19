@@ -29,7 +29,6 @@ class Attractor {
     PVector force = location.copy();
     force.sub(m.location);
     float distance = force.mag();
-    println(distance);
     
     //constrain the distance between 10-100
     distance = constrain(distance,20,100);
