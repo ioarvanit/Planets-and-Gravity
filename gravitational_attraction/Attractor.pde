@@ -3,6 +3,9 @@ class Attractor {
   //The mass of the attractor
   float mass;
   
+  //The hue of the attractor
+  float hue;
+  
   //The Gravity global constant
   float G;
   
@@ -13,7 +16,8 @@ class Attractor {
   
   
   //When creating new attractor we get as parameters the mass and the position
-  Attractor(float m,float x_, float y_) {
+  Attractor(float h,float m,float x_, float y_) {
+    hue = h;
     mass = m;
     x = x_;
     y = y_;
@@ -42,9 +46,10 @@ class Attractor {
   
   //Display the attractor on screen
   void display() {
-    stroke(#B94F0D);
+    colorMode(HSB,360,100,100);
+    stroke(hue,100,100);
     strokeWeight(mass/20);
-    fill(#F26405);
+    fill(hue,100,100);
     ellipse(location.x,location.y,mass,mass);
   }
 }

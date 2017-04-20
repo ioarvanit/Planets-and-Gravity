@@ -16,9 +16,9 @@ class Mover {
   
   
   //Apply a force to the mover by an attractor
-  void applyForce(PVector force) {
-    if (DisplayForcesOn) {
-      displayForces(force);
+  void applyForce(PVector force, float hue) {
+    if (displayForcesOn) {
+      displayForces(force, hue);
     }
     PVector f = PVector.div(force,mass);
     acceleration.add(f);
@@ -35,21 +35,20 @@ class Mover {
   
   //Display the mover on screen
   void display() {
-    strokeWeight(mass/10);
-    stroke(80);
-    fill(175);
+    noStroke();
+    fill(180,0,100,200);
     ellipse(location.x,location.y,mass,mass);
   }
   
   
   //Display forces by attractors
-  void displayForces(PVector force) {
+  void displayForces(PVector force, float hue) {
     PVector endV = force.copy();
     endV.mult(100);
     float strength = endV.mag();
     strength = constrain(strength,0.0,mass);
-    strokeWeight(strength/10);
-    stroke(#B94F0D);
+    strokeWeight(strength/30);
+    stroke(hue,100,80);
     pushMatrix();
     translate(location.x,location.y);
     line(0,0,endV.x,endV.y);
