@@ -122,7 +122,12 @@ void keyPressed() {
   if (key == 'f' || key == 'F') {
     displayForcesOn = !displayForcesOn; 
   }
+  if (key == 'c' || key == 'C') {
+    aCount = 0;
+    mCount = 0;
+  }
 }
+
 
 void showInfo() {
   fill(180,100,100);
